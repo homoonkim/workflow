@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>웨이브릿지 프라임 - 온보딩 서류 목록</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f7fa;
+            color: #1a1a2e;
+            line-height: 1.7;
+            font-size: 14px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+        
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: #3b5bdb;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .logo-icon svg {
+            width: 22px;
+            height: 22px;
+            fill: white;
+        }
+        
+        .logo-text {
+            font-size: 22px;
+            font-weight: 700;
+            color: #3b5bdb;
+        }
+        
+        .header h1 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #1a1a2e;
+        }
+        
+        .file-path {
+            margin-top: 12px;
+            font-size: 13px;
+            color: #6b7280;
+            background: #f3f4f6;
+            padding: 8px 16px;
+            border-radius: 6px;
+            display: inline-block;
+        }
+        
+        .file-path a {
+            color: #3b5bdb;
+            text-decoration: none;
+        }
+        
+        .file-path a:hover {
+            text-decoration: underline;
+        }
+        
+        .tabs {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 24px;
+            background: white;
+            padding: 4px;
+            border-radius: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+        
+        .tab {
+            flex: 1;
+            padding: 12px 16px;
+            border: none;
+            background: transparent;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #6b7280;
+        }
+        
+        .tab:hover {
+            background: #f3f4f6;
+        }
+        
+        .tab.active {
+            background: #3b5bdb;
+            color: white;
+        }
+        
+        .content {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            padding: 28px 32px;
+        }
+        
+        .section {
+            margin-bottom: 28px;
+        }
+        
+        .section:last-child {
+            margin-bottom: 0;
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3b5bdb;
+        }
+        
+        .section-number {
+            background: #3b5bdb;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 700;
+        }
+        
+        .section-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1a1a2e;
+        }
+        
+        .doc-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .doc-table th {
+            text-align: left;
+            padding: 10px 12px;
+            background: #f8f9fa;
+            font-size: 12px;
+            font-weight: 600;
+            color: #6b7280;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .doc-table td {
+            padding: 12px;
+            border-bottom: 1px solid #f3f4f6;
+            vertical-align: top;
+        }
+        
+        .doc-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .doc-table tr:hover td {
+            background: #f9fafb;
+        }
+        
+        .doc-name {
+            font-weight: 500;
+            color: #1a1a2e;
+        }
+        
+        .doc-note {
+            font-size: 12px;
+            color: #6b7280;
+            margin-top: 2px;
+        }
+        
+        .doc-date {
+            font-size: 13px;
+            color: #6b7280;
+            white-space: nowrap;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        
+        .badge.original {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 24px;
+            color: #9ca3af;
+            font-size: 12px;
+        }
+        
+        .note-box {
+            background: #fffbeb;
+            border: 1px solid #fde68a;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-top: 20px;
+            font-size: 13px;
+            color: #92400e;
+        }
+        
+        .note-box strong {
+            color: #d97706;
+        }
+        
+        .col-name { width: 45%; }
+        .col-note { width: 35%; }
+        .col-date { width: 20%; text-align: right; }
+        
+        .doc-table th.col-date,
+        .doc-table td.col-date {
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24"><path d="M3 17h18v2H3v-2zm0-7h18v5H3v-5zm0-4h18v2H3V6z"/></svg>
+                </div>
+                <span class="logo-text">wavebridge prime</span>
+            </div>
+            <h1>온보딩 서류 목록</h1>
+            <p class="file-path">📁 <a href="file:///G:/공유 드라이브/KYB,KYC 자료 (WBP, WSP)/온보딩 서류/프라임 KR" target="_blank">G:\공유 드라이브\KYB,KYC 자료 (WBP, WSP)\온보딩 서류\프라임 KR</a></p>
+        </div>
+        
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('corporate')">법인/단체</button>
+            <button class="tab" onclick="showTab('vasp')">VASP</button>
+            <button class="tab" onclick="showTab('individual')">개인</button>
+        </div>
+        
+        <!-- 법인/단체 탭 -->
+        <div id="corporate" class="tab-content active">
+            <div class="content">
+                <div class="section">
+                    <div class="section-header">
+                        <div class="section-number">1</div>
+                        <div class="section-title">웨이브릿지 제공 양식</div>
+                    </div>
+                    <table class="doc-table">
+                        <thead>
+                            <tr>
+                                <th class="col-name">서류명</th>
+                                <th class="col-note">비고</th>
+                                <th class="col-date">최종 업데이트</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="doc-name">가입신청서 (법인/단체)</span></td>
+                                <td><span class="doc-note">법인인감 날인</span></td>
+                                <td class="col-date"><span class="doc-date">2025-12-24</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="doc-name">개인(신용)정보 수집 및 이용 안내</span></td>
+                                <td><span class="doc-note">필수 동의</span></td>
+                                <td class="col-date"><span class="doc-date">2025-12-24</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="doc-name">개인정보 수집 및 이용 동의서</span></td>
+                                <td><span class="doc-note">선택 동의, 자필서명</span></td>
+                                <td class="col-date"><span class="doc-date">2025-12-24</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="doc-name">마케팅 정보 수신 동의</span></td>
+                                <td><span class="doc-note">선택 동의, 자필서명</span></td>
+                                <td class="col-date"><span class="doc-date">2025-12-24</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="doc-name">서비스 이용 약관</span></td>
+                                <td><span class="doc-note">법인인감 날인</span></td>
+                                <td class="col-date"><span class="doc-date">2025-12-24</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="doc-name">위임장</span></td>
+                                <td><span class="doc-note">대리인 방문 시, 법인인감 날인</span></td>
+                                <td class="col-date"><span class="doc-date">2025-12-24</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="doc-name">국내 가상자산 사업 여부 확인서</span></td>
+                                <td><span class="doc-note">법인인감 날인</span></td>
+                                <td class="col-date"><span class="doc-date">2025-12-24</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="doc-name">CARF 본인확인서 (법인)</span></td>
+                                <td><span class="doc-note">해외 납세 의무 확인</span></td>
+                                <td class="col-date"><span class="doc-date">v1.4</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="section">
+                    <div class="section-header">
+                        <div class="section-number">2</div>
+                        <div class="section-title">법인 제반 서류</div>
+                    </div>
+                    <table class="doc-table">
+                        <thead>
+                            <tr>
+                                <th class="col-name">서류명</th>
+                                <th class="col-note">비고</th>
+                                <th class="col-date">유효기간</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="doc-name">사업자등록증 (택1)</span></td>
+                                <td><span class="doc-note">사본, 원본대조필 + 법인인감 날인</span></td>
+                                <td class="col-date"><span class="doc-date">-</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="doc-name">사업자등록증명원 (택1)</span></td>
+                                <td><span class="doc-note"><span class="badge original">원본</span></span></td>
+                                <td class="col-date"><span class="doc-date">최근 3개월</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="doc-name">법인등기사항전부증명서</span></td>
+                                <td><span class="doc-note"><span class="badge original">원본</span> 말소사항 포함, 제출용</span></td>
+                                <td class="col-date"><span class="doc-date">최근 3개월</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="doc-name">법인인감증명서</span></td>
+                                <td><span class="doc-note"><span class="badge original">원본</span></span></td>
+                                <td class="col-date"><span class="doc-date">최근 3개월</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="doc-name">주주명부</span></td>
+                                <td><span class="doc-note">원본대조필 + 법인인감 날인</span></td>
+                                <td class="col-date"><span class="doc-date">최근 3개월</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="doc-name">대표자/계약대리인/거래대리인 실명확인증표 사본</span></td>
+                                <td><span class="doc-note">주민등록증, 운전면허증 중 택1</span></td>
+                                <td class="col-date"><span class="doc-date">-</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="note-box">
+                    <strong>※ 비영리단체의 경우:</strong> 정관, 회칙, 규약, 설립인가 허가증 등 설립목적을 확인할 수 있는 서류 추가 제출
+                </div>
+            </div>
+        </div>
+        
+        <!-- VASP 탭 -->
+        <div id="vasp" class="tab-content">
+            <div class="content">
+                <div class="section">
+                    <div class="section-header">
+                        <div class="section-number">1</div>
+                        <div class="section-title">웨이브릿지 제공 양식</div>
+                    </div>
+                    <table class="doc-table">
+                        <thead>
+                            <tr>
+                                <th class="col-name">서류명</th>
+                                <th class="col-note">비고</th>
+                                <th class="col-date">최종 업데이트</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="doc-name">가입신청서 (법인/단체)</span></td>
+                                <td><span class="doc-note">법인인감 날인</span></td>
+                                <td class="col-date"><span class="doc-date">2025-12-24</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="doc-name">개인(신용)정보 수집 및 이용 안내</span></td>
+                                <td><span class="doc-note">필수 동의</span></td>
+                                <td class="col-date"><span class="doc-date">2025-12-24</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="doc-name">개인정보 수집 및 이용 동의서</span></td>
+                                <td><span class="doc-note">선택 동의, 자필서명</span></td>
+                                <td class="col-date"><span class="doc-date">2025-12-24</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="doc-name">마케팅 정보 수신 동의</span></td>
+                                <td><span class="doc-note">선택 동의, 자필서명</span></td>
+                                <td class="col-date"><span class="doc-date">2025-12-24</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="doc-name">서비스 이용 약관</span></td>
+                                <td><span class="doc-note">법인인감 날인</span></td>
+                                <td class="col-date"><span class="doc-date">2025-12-24</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="doc-name">위임장</span></td>
+                                <td><span class="doc-note">대리인 방문 시, 법인인감 날인</span></td>
+                                <td class="col-date"><span class="doc-date">2025-12-24</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="doc-name">국내 가상자산 사업 여부 확인서</span></td>
+                                <td><span class="doc-note">법인인감 날인</span></td>
+                                <td class="col-date"><span class="doc-date">2025-12-24</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="doc-name">가상자산사업자용 추가 확인서</span></td>
+                                <td><span class="doc-note">법인인감 날인 + 자필서명</span></td>
+                                <td class="col-date"><span class="doc-date">2025-12-24</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="doc-name">KYVQ (Know Your VASP Questionnaire)</span></td>
+                                <td><span class="doc-note">VASP 필수</span></td>
+                                <td class="col-date"><span class="doc-date">v1.2</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="doc-name">CARF 본인확인서 (법인)</span></td>
+                                <td><span class="doc-note">해외 납세 의무 확인</span></td>
+                                <td class="col-date"><span class="doc-date">v1.4</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="section">
+                    <div class="section-header">
+                        <div class="section-number">2</div>
+                        <div class="section-title">법인 제반 서류</div>
+                    </div>
+                    <table class="doc-table">
+                        <thead>
+                            <tr>
+                                <th class="col-name">서류명</th>
+                                <th class="col-note">비고</th>
+                                <th class="col-date">유효기간</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="doc-name">사업자등록증 (택1)</span></td>
+                                <td><span class="doc-note">사본, 원본대조필 + 법인인감 날인</span></td>
+                                <td class="col-date"><span class="doc-date">-</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="doc-name">사업자등록증명원 (택1)</span></td>
+                                <td><span class="doc-note"><span class="badge original">원본</span></span></td>
+                                <td class="col-date"><span class="doc-date">최근 3개월</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="doc-name">법인등기사항전부증명서</span></td>
+                                <td><span class="doc-note"><span class="badge original">원본</span> 말소사항 포함, 제출용</span></td>
+                                <td class="col-date"><span class="doc-date">최근 3개월</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="doc-name">법인인감증명서</span></td>
+                                <td><span class="doc-note"><span class="badge original">원본</span></span></td>
+                                <td class="col-date"><span class="doc-date">최근 3개월</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="doc-name">주주명부</span></td>
+                                <td><span class="doc-note">원본대조필 + 법인인감 날인</span></td>
+                                <td class="col-date"><span class="doc-date">최근 3개월</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="doc-name">대표자/계약대리인/거래대리인 실명확인증표 사본</span></td>
+                                <td><span class="doc-note">주민등록증, 운전면허증 중 택1</span></td>
+                                <td class="col-date"><span class="doc-date">-</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="section">
+                    <div class="section-header">
+                        <div class="section-number">3</div>
+                        <div class="section-title">VASP 추가 서류</div>
+                    </div>
+                    <table class="doc-table">
+                        <thead>
+                            <tr>
+                                <th class="col-name">서류명</th>
+                                <th class="col-note">비고</th>
+                                <th class="col-date">유효기간</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="doc-name">가상자산사업자 신고수리증</span></td>
+                                <td><span class="doc-note">금융위원회 발급, 최신본 요청</span></td>
+                                <td class="col-date"><span class="doc-date">-</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="doc-name">ISMS 또는 ISMS-P 인증서</span></td>
+                                <td><span class="doc-note">정보보호관리체계 인증, 최신본 요청</span></td>
+                                <td class="col-date"><span class="doc-date">유효기간 내</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 개인 탭 -->
+        <div id="individual" class="tab-content">
+            <div class="content">
+                <div class="section">
+                    <div class="section-header">
+                        <div class="section-number">1</div>
+                        <div class="section-title">웨이브릿지 제공 양식</div>
+                    </div>
+                    <table class="doc-table">
+                        <thead>
+                            <tr>
+                                <th class="col-name">서류명</th>
+                                <th class="col-note">비고</th>
+                                <th class="col-date">최종 업데이트</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="doc-name">가입신청서 (개인/개인사업자)</span></td>
+                                <td><span class="doc-note">자필서명</span></td>
+                                <td class="col-date"><span class="doc-date">2025-12-24</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="doc-name">개인(신용)정보 수집 및 이용 안내</span></td>
+                                <td><span class="doc-note">필수 동의</span></td>
+                                <td class="col-date"><span class="doc-date">2025-12-24</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="doc-name">개인정보 수집 및 이용 동의서</span></td>
+                                <td><span class="doc-note">선택 동의, 자필서명</span></td>
+                                <td class="col-date"><span class="doc-date">2025-12-24</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="doc-name">마케팅 정보 수신 동의</span></td>
+                                <td><span class="doc-note">선택 동의, 자필서명</span></td>
+                                <td class="col-date"><span class="doc-date">2025-12-24</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="doc-name">서비스 이용 약관</span></td>
+                                <td><span class="doc-note">자필서명</span></td>
+                                <td class="col-date"><span class="doc-date">2025-12-24</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="doc-name">CARF 본인확인서 (개인)</span></td>
+                                <td><span class="doc-note">해외 납세 의무 확인</span></td>
+                                <td class="col-date"><span class="doc-date">v1.5</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="section">
+                    <div class="section-header">
+                        <div class="section-number">2</div>
+                        <div class="section-title">개인 제반 서류</div>
+                    </div>
+                    <table class="doc-table">
+                        <thead>
+                            <tr>
+                                <th class="col-name">서류명</th>
+                                <th class="col-note">비고</th>
+                                <th class="col-date">유효기간</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="doc-name">실명확인증표 사본</span></td>
+                                <td><span class="doc-note">주민등록증, 운전면허증 중 택1</span></td>
+                                <td class="col-date"><span class="doc-date">-</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="note-box">
+                    <strong>※ 개인사업자의 경우:</strong> 사업자등록증 추가 제출
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            © 2026 Wavebridge, Inc. All rights reserved.
+        </div>
+    </div>
+    
+    <script>
+        function showTab(tabId) {
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            event.target.classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+        }
+    </script>
+</body>
+</html>
